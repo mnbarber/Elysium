@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 const controllers = require('./controllers');
 const methodOverride = require('method-override');
 const cors = require('cors');
