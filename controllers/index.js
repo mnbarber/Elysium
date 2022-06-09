@@ -1,9 +1,5 @@
-const books = require('./books');
-const authors = require('./authors');
-const reviews = require('./reviews');
-
 module.exports = {
-    books,
-    authors,
-    reviews,
+    books: require('./books'),
+    authors: require('./authors'),
+    reviews: require('./reviews'),
 };
