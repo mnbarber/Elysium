@@ -6,6 +6,7 @@ const controllers = require('./controllers');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const morgan = require('morgan');
+const testBooks = require('./testBooks.json');
 
 require('./config/db.connection');
 
@@ -20,5 +21,9 @@ app.use('/books', controllers.books);
 app.use('/authors', controllers.authors);
 app.use('/reviews', controllers.reviews);
 app.get('/', (req, res) => res.redirect('/books'));
+
+app.get('/testbooks', (req, res) => {
+    res.json(testBooks)
+})
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}...`));
