@@ -5,8 +5,10 @@ const db = require('../models');
 router.get('/', async (req, res, next) => {
     try {
         const books = await db.Book.find({});
-        const context = { books };
-        return res.render('index.ejs', context);
+        const data = res.json(books);
+        console.log(data);
+        // const context = { books };
+        // return res.render('index.ejs', context);
     } catch(error) {
         req.error = error;
         return next();
