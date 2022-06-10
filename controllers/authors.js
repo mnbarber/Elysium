@@ -1,25 +1,27 @@
 const express = require('express');
-const { Authors } = require('../models');
 const router = express.Router();
+const db = require('../models');
 
-router.get('/search', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
-        res.json(
-            await Authors.find({
-                name: { $regex: req.query.query, $options: "i" },
-            }).limit(20)
-        );
+        const authors = await db.Author.find({});
+        const data = res.json(authors);
     } catch(error) {
-        res.status(400).json(error);
+        req.error = error;
+        return next();
     }
 });
 
-router.get('/:id', async (req, res) => {
-    try {
-        res.json(await Authors.findById(req.params.id));
-    } catch(error) {
-        res.status(400).json(error);
-    }
+router.post('/newauthor', (req, res, next) => {
+    Author.create({
+        name: req.body.name,
+        img: req.body.img,
+        bio: req.body.bio,
+    })
+    .then(newAuthor => {
+        res.json(newAuthor)
+    })
+    .catch(err => console.log(err))
 });
 
 module.exports = router;
