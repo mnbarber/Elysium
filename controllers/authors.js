@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models');
+const Author = require('../models/Authors');
 
 router.get('/', async (req, res, next) => {
-    try {
-        const authors = await db.Author.find({});
-        const data = res.json(authors);
-    } catch(error) {
-        req.error = error;
-        return next();
-    }
+    Author.find({})
+        .then(author => {
+            res.json(author)
+        })
+        .catch(next);
 });
 
 router.post('/newauthor', (req, res, next) => {

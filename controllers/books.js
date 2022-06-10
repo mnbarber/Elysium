@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models');
+const Book = require('../models/Books')
 
 router.get('/', async (req, res, next) => {
-    try {
-        const books = await db.Book.find({});
-        const data = res.json(books);
-    } catch(error) {
-        req.error = error;
-        return next();
-    }
+    Book.find({})
+        .then(book => {
+            res.json(book)
+        })
+        .catch(next);
 });
 
 router.post('/newbook', (req, res, next) => {
