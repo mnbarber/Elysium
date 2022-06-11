@@ -35,7 +35,7 @@ router.patch('/books/:id', (req, res, next) => {
 
 router.delete('/books/:id', (req, res, next) => {
     Book.findOne({
-        id: req.params.id
+        id: req.Book._id
     })
     .then(foundBook => {
         return foundBook.deleteOne()
