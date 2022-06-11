@@ -23,4 +23,24 @@ router.post('/newbook', (req, res, next) => {
     .catch(err => console.log(err))
 });
 
+router.patch('/books/:id', (req, res, next) => {
+    Book.findOneAndUpdate({
+        id: req.params.id
+    }, req.body)
+    .then(response => {
+        res.json(response)
+    })
+    .catch(next)
+});
+
+router.delete('/books/:id', (req, res, next) => {
+    Book.findOne({
+        id: req.params.id
+    })
+    .then(foundBook => {
+        return foundBook.deleteOne()
+    })
+    .catch(next)
+})
+
 module.exports = router;
