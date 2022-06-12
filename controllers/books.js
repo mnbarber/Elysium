@@ -26,14 +26,20 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.patch('/books/:id', (req, res, next) => {
-    Book.findOneAndUpdate({
-        id: req.params.id
-    }, req.body)
-    .then(response => {
-        res.json(response)
-    })
-    .catch(next)
+router.put('/:id/edit', async (req, res, next) => {
+    try {
+        const updatedBook = await Book.findByIdAndUpdate(req.params.id, {
+            title: req.body.title,
+            cover: req.body.cover,
+            author: req.body.author,
+            published: req.body.published
+        })
+        res.json(updatedBook)
+    } catch(error) {
+        console.log(error);
+        req.error = error;
+        return next();
+    }
 });
 
 router.delete('/:id', async (req, res, next) => {
