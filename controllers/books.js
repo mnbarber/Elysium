@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.put('/:id/edit', async (req, res, next) => {
+router.patch('/:id/edit', async (req, res, next) => {
     try {
         const updatedBook = await Book.findByIdAndUpdate(req.params.id, {
             title: req.body.title,
