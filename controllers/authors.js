@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
         .catch(next);
 });
 
-router.post('/newauthor', (req, res, next) => {
+router.post('/newauthor', async (req, res, next) => {
     try {
         const newAuthor = await Author.create(req.params.id)
         res.json(newAuthor)
