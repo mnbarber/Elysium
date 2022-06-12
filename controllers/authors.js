@@ -33,14 +33,15 @@ router.patch('/authors/:id', (req, res, next) => {
     .catch(next)
 });
 
-router.delete('/authors/:id', (req, res, next) => {
-    Author.findOne({
-        id: req.Author._id
-    })
-    .then(foundAuthor => {
-        return foundAuthor.deleteOne()
-    })
-    .catch(next)
+router.delete('/:id', async (req, res, next) => {
+    try {
+        const deletedAuthor = await Author.findByIdAndDelete(req.params.id)
+        res.json(deletedAuthor)
+        return res.redirect('/authors')
+    } catch(error) {
+        req.error = error;
+        return next();
+    }
 })
 
 module.exports = router;
