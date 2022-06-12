@@ -10,17 +10,30 @@ router.get('/', async (req, res, next) => {
         .catch(next);
 });
 
-router.post('/newbook', (req, res, next) => {
-    Book.create({
-        title: req.body.title,
-        cover: req.body.cover,
-        author: req.body.author,
-        published: req.body.published
-    })
-    .then(newBook => {
+router.post('/', async (req, res, next) => {
+    try {
+        const newBook = await Book.create({
+            title: req.body.title,
+            cover: req.body.cover,
+            author: req.body.author,
+            published: req.body.published
+        })
         res.json(newBook)
-    })
-    .catch(err => console.log(err))
+    } catch(error) {
+        console.log(error);
+        req.error = error;
+        return next();
+    }
+    // Book.create({
+    //     title: req.body.title,
+    //     cover: req.body.cover,
+    //     author: req.body.author,
+    //     published: req.body.published
+    // })
+    // .then(newBook => {
+    //     res.json(newBook)
+    // })
+    // .catch(err => console.log(err))
 });
 
 router.patch('/books/:id', (req, res, next) => {
