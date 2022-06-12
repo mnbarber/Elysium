@@ -24,16 +24,6 @@ router.post('/', async (req, res, next) => {
         req.error = error;
         return next();
     }
-    // Book.create({
-    //     title: req.body.title,
-    //     cover: req.body.cover,
-    //     author: req.body.author,
-    //     published: req.body.published
-    // })
-    // .then(newBook => {
-    //     res.json(newBook)
-    // })
-    // .catch(err => console.log(err))
 });
 
 router.patch('/books/:id', (req, res, next) => {
@@ -46,14 +36,22 @@ router.patch('/books/:id', (req, res, next) => {
     .catch(next)
 });
 
-router.delete('/books/:id', (req, res, next) => {
-    Book.findOne({
-        id: req.Book._id
-    })
-    .then(foundBook => {
-        return foundBook.deleteOne()
-    })
-    .catch(next)
+router.delete('/:id', async (req, res, next) => {
+    try {
+        const deletedBook = await Book.findByIdAndDelete(req.params.id)
+        res.json(deletedBook)
+        return res.redirect('/books')
+    } catch(error) {
+        req.error = error;
+        return next();
+    }
+    // Book.findOne({
+    //     id: req.Book._id
+    // })
+    // .then(foundBook => {
+    //     return foundBook.deleteOne()
+    // })
+    // .catch(next)
 })
 
 module.exports = router;
