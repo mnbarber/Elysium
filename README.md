@@ -10,7 +10,7 @@ Elysium is a book library website where there is a random book displayed for use
 
 [Elysium](https://elysium-books.herokuapp.com)
 
-[Server](https://github.com/mnbarber/Elysium-Backend)
+[Frontend](https://github.com/mnbarber/Elysium-Frontend)
 
 ## Technologies Used
 
@@ -18,7 +18,7 @@ Full CRUD application using Express and React.
 
 ## Installation
 
-If you want to make changes to this app, fork and clone this repo and the [server](https://github.com/mnbarber/Elysium-Backend) side as well. Npm install should install the following dependencies: 
+If you want to make changes to this app, fork and clone this repo and the [frontend](https://github.com/mnbarber/Elysium-Frontend) side as well. Npm install should install the following dependencies: 
 
 - axios
 - bootstrap
@@ -29,6 +29,7 @@ If you want to make changes to this app, fork and clone this repo and the [serve
 - react-bootstrap
 - react-router-dom
 - react-dom
+- ejs
 
 Then a quick npm start should open up the app! Enjoy!
 
