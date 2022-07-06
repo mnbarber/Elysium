@@ -20,4 +20,10 @@ app.use('/books', controllers.books);
 app.use('/authors', controllers.authors);
 app.use('/reviews', controllers.reviews);
 
+app.use('/login', (req, res) => {
+    res.send({
+        token: 'test123'
+    });
+});
+
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}...`));
